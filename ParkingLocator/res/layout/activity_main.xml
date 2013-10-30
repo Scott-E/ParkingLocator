@@ -39,7 +39,7 @@
 	    </Spinner>
 	    
 	    <Spinner
-	        android:id="@+id/startCiv"
+	        android:id="@+id/start"
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
 	        android:entries="@array/am_pm" >
@@ -69,7 +69,7 @@
 	    </Spinner>
 	    
 	    <Spinner
-	        android:id="@+id/endCiv"
+	        android:id="@+id/end"
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
 	        android:entries="@array/am_pm" >
@@ -109,7 +109,8 @@
 	        android:id="@+id/submit"
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
-	        android:text="@string/submit" >
+	        android:text="@string/submit"
+	        android:onClick="onClick" >
 	        
 	    </Button>
 	    
