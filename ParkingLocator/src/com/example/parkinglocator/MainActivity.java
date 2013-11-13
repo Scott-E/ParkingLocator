@@ -23,9 +23,10 @@ public class MainActivity extends Activity {
         return true;
     }
     
-    String address, street, day;
+    String address, street, day, timeVarStart, timeVarEnd;
     int startH, endH, deltaH;
-    double costArray[][] = new double[7][24];
+    double costArray[][] = new double[6][24];
+    double theArray[] = new double[6];
     
     public void onClick()
     {
@@ -34,23 +35,104 @@ public class MainActivity extends Activity {
     	spinner = (Spinner)findViewById(R.id.endH);
     	endH = Integer.parseInt(spinner.getSelectedItem().toString());
     	spinner = (Spinner)findViewById(R.id.start);
-    	String timeVar = spinner.getSelectedItem().toString();
-    	if(timeVar != "a.m.")
+    	timeVarStart = spinner.getSelectedItem().toString();
+    	if(timeVarStart != "a.m.")
     		startH += 12;
     	spinner = (Spinner)findViewById(R.id.end);
-    	timeVar = spinner.getSelectedItem().toString();
-    	if(timeVar != "a.m.")
+    	timeVarEnd = spinner.getSelectedItem().toString();
+    	if(timeVarEnd != "a.m.")
     		endH += 12;
+    	deltaH = endH - startH;
     	spinner = (Spinner)findViewById(R.id.parkDay);
     	day = spinner.getSelectedItem().toString();
     	EditText viewer = (EditText)findViewById(R.id.address);
     	address = viewer.getText().toString();
     }
     
+    public void calculateCosts()
+    {
+    	int meterVar = deltaH;
+    	if(startH < 8)
+    		meterVar -= (8 - startH);
+    	if(endH > 18)
+    		meterVar -= (endH - 18);
+    	
+    	//All Meters
+    	if(meterVar <= 0)
+    	{
+    		theArray[0] = 0;
+    		theArray[1] = 0;
+    		theArray[2] = 0;
+    	}
+    	
+    	//Blue Meters
+    	if(meterVar <= 3 && meterVar > 0)
+    		theArray[0] = meterVar;
+    	else
+    		theArray[0] = 999;
+    	
+    	//Gray Meters
+    	if(meterVar <= 1 && meterVar > 0)
+    		theArray[1] = meterVar;
+    	else
+    		theArray[1] = 999;
+    	
+    	//Brown Meters
+    	if(meterVar <= 10 && meterVar > 0)
+    		theArray[2] = meterVar * 0.4;
+    	else
+    		theArray[2] = 999;
+    	
+    	//TownCenter
+    	if(deltaH <= 2)
+			theArray[3] = 0;
+		else if(deltaH == 3)
+			theArray[3] = 3;
+		else if(deltaH == 4)
+			theArray[3] = 5;
+		else if(deltaH == 5)
+			theArray[3] = 7;
+		else if(deltaH == 6)
+			theArray[3] = 8;
+		else if(deltaH <= 8)
+			theArray[3] = 10;
+		else if(deltaH <= 10)
+			theArray[3] = 12;
+		else if(deltaH <= 12)
+			theArray[3] = 15;
+		else
+			theArray[3] = 20;
+    	
+    	//Municipal Garages
+    	if(deltaH <= 2)
+			theArray[4] = 0;
+		else if(deltaH == 3)
+			theArray[4] = 2;
+		else if(deltaH <= 4)
+			theArray[4] = 4;
+		else if(deltaH <= 8)
+			theArray[4] = deltaH;
+		else
+			theArray[4] = 999;
+    	
+    	//Corporate Place
+    	if(deltaH <= 4)
+			theArray[5] = 2 * deltaH;
+		else
+			theArray[5] = 999;
+    	
+    	//Courthouse Place
+    	if(deltaH <= 6)
+			theArray[6] = 1.5 * deltaH;
+		else
+			theArray[6] = 999;
+    }
+    
     public void populateArray()
     {
     	int hourCounter = 1;
     	//Blue Meters
+    	if(startH < 8 && timeVarStart == "a.m.")
     	for (int i = 0; i < 24; i++)
     	{
     		if(hourCounter <= 3)
@@ -63,16 +145,16 @@ public class MainActivity extends Activity {
     	}
     	hourCounter = 1;
     	
-    	//Grey Meters
+    	//Gray Meters
     	for (int i = 0; i < 24; i++)
     	{
     		if(hourCounter <= 1)
     		{
     			costArray[1][i] = hourCounter;
-    			hourCounter++;
     		}
     		else
     			costArray[1][i] = 999;
+    		hourCounter++;
     	}
     	hourCounter =  1;
     	
@@ -81,7 +163,7 @@ public class MainActivity extends Activity {
     	{
     		if(hourCounter <= 10)
     		{
-    			costArray[2][i] = hourCounter * 0.1;
+    			costArray[2][i] = hourCounter * 0.4;
     			hourCounter++;
     		}
     		else
@@ -96,7 +178,7 @@ public class MainActivity extends Activity {
 //    	}
 //    	hourCounter = 1;
     	
-    	//Municipal Garages
+    	//Town Center
     	for (int i = 0; i < 24; i++)
     	{
     		if(hourCounter <= 2)
@@ -121,13 +203,41 @@ public class MainActivity extends Activity {
     	}
     	hourCounter = 1;
     	
-    	//Town Center
-    	
+    	//Municipal Garages
+    	for (int i = 0; i < 24; i++)
+    	{
+    		if(hourCounter <= 2)
+    			costArray[4][i] = 0;
+    		else if(hourCounter == 3)
+    			costArray[4][i] = 2;
+    		else if(hourCounter == 4)
+    			costArray[4][i] = 4;
+    		else if(hourCounter <= 8)
+    			costArray[4][i] = hourCounter;
+    		else
+    			costArray[4][i] = 999;
+    		hourCounter++;
+    	}
+    	hourCounter = 1;
     	
     	//Corporate Place
-    	
+    	for (int i = 0; i < 24; i++)
+    	{
+    		if(hourCounter <= 4)
+    			costArray[5][i] = 2 * hourCounter;
+    		else
+    			costArray[5][i] = 999;
+    		hourCounter++;
+    	}
+    	hourCounter = 1;
     	
     	//Courthouse Place
-    	
+    	for (int i = 0; i < 24; i++)
+    	{
+    		if(hourCounter <= 6)
+    			costArray[6][i] = 1.5 * hourCounter;
+    		else
+    			costArray[6][i] = 999;
+    	}
     }
 }
