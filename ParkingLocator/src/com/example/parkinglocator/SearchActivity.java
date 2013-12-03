@@ -19,43 +19,75 @@ public class SearchActivity extends Activity {
 		// Show the Up button in the action bar.
 //		double costArray[] = new double[6];
 //		costArray = getIntent().getDoubleArrayExtra("key");
-		double costArray[] = getIntent().getDoubleArrayExtra("key");
-		int sortedCosts[] = new int[7];
+//		double costArray[] = getIntent().getDoubleArrayExtra("key");
+		double costArray[] = new double[7];
+		for(int i = 0; i < 7; i++)
+			costArray[i] = getIntent().getDoubleExtra("cost" + i, 0);
+		int test = getIntent().getIntExtra("test", 0);
+		String tes = getIntent().getStringExtra("factor");
+		int sortedCosts[] = new int[]{0, 1, 2, 3, 4, 5, 6};
 		
 		sortedCosts = sortResults(costArray, sortedCosts);
-		buildResults(R.id.resultsField, costArray, sortedCosts);
+		buildResults(R.id.resultsField, costArray, sortedCosts, tes);
 		setupActionBar();
 	}
 	
 	public int[] sortResults(double costArray[], int indexArray[])
 	{
-		int lesserIndex = 0, greaterIndex = 0;
-		for (int i = 0; i < 6; i++)
+//		int lesserIndex = 0, greaterIndex = 0;
+//		for (int i = 0; i < 6; i++)
+//		{
+//			lesserIndex = i;
+//			for(int j = i + 1; j < 7; j++)
+//			{
+//				greaterIndex = j;
+//				if(costArray[j] < costArray[i])
+//				{
+//					lesserIndex = j;
+//					greaterIndex = i;
+//				}
+//			}
+//			indexArray[i] = lesserIndex;
+//			indexArray[i + 1] = greaterIndex;
+//		}
+		int tmpIndex;
+		double tmpCost;
+		boolean swapped = true;
+		while(swapped)
 		{
-			lesserIndex = i;
-			for(int j = i + 1; j < 7; j++)
+			swapped = false;
+			for (int i = 0; i < 7; i++)
 			{
-				greaterIndex = j;
-				if(costArray[j] < costArray[i])
+				for (int j = 0; j < 6; j++)
 				{
-					lesserIndex = j;
-					greaterIndex = i;
+					if(costArray[j] < costArray[j + 1])
+					{
+						tmpCost = costArray[j];
+						costArray[j] = costArray[j + 1];
+						costArray[j + 1] = tmpCost;
+						tmpIndex = indexArray[j];
+						indexArray[j] = indexArray[j + 1];
+						indexArray[j + 1] = tmpIndex;
+						swapped = true;
+					}
 				}
 			}
-			indexArray[i] = lesserIndex;
-			indexArray[i + 1] = greaterIndex;
 		}
 		return indexArray;
 	}
 	
-	public void buildResults(int fieldId, double costs[], int costsIndex[])
+	public void buildResults(int fieldId, double costs[], int costsIndex[], String tes)
 	{
 		LinearLayout field = (LinearLayout)this.findViewById(fieldId);
 		LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.WRAP_CONTENT, 
                 LinearLayout.LayoutParams.WRAP_CONTENT);
 		
-		for(int i = 0; i < 6; i++)
+		TextView testing = new TextView(this.getApplicationContext());
+		testing.setText(tes);
+		field.addView(testing);
+		
+		for(int i = 0; i < 7; i++)
 		{
 			TextView result = new TextView(this.getApplicationContext());
 			switch(costsIndex[i])
@@ -89,8 +121,11 @@ public class SearchActivity extends Activity {
 				result.setText("$" + costs[costsIndex[i]] + " - Courthouse Place located at South Winooski Avenue");
 				break;
 			}
-			result.setId(costsIndex[i]);
-			field.addView(result, params);
+			if(costs[costsIndex[i]] != 999)
+			{
+				result.setId(costsIndex[i]);
+				field.addView(result, params);
+			}
 		}
 	}
 

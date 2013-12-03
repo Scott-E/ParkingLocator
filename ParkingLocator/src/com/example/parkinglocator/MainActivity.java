@@ -28,7 +28,7 @@ public class MainActivity extends Activity {
         return true;
     }
     
-    String address, street, day;
+    String address, street, day, timeFactor;
     int startH, endH, deltaH;
     double costArray[][] = new double[6][24];
     double theArray[] = new double[7];
@@ -46,19 +46,26 @@ public class MainActivity extends Activity {
     	    	spinner = (Spinner)findViewById(R.id.endH);
     	    	endH = Integer.parseInt(spinner.getSelectedItem().toString());
     	    	spinner = (Spinner)findViewById(R.id.start);
-    	    	if(spinner.getSelectedItem().toString() != "a.m.")
+    	    	timeFactor = spinner.getSelectedItem().toString();
+    	    	if(timeFactor != "a.m.")
     	    		startH += 12;
     	    	spinner = (Spinner)findViewById(R.id.end);
-    	    	if(spinner.getSelectedItem().toString() != "a.m.")
+    	    	timeFactor = spinner.getSelectedItem().toString();
+    	    	if(timeFactor != "a.m.")
     	    		endH += 12;
     	    	deltaH = endH - startH;
     	    	spinner = (Spinner)findViewById(R.id.parkDay);
     	    	day = spinner.getSelectedItem().toString();
-    	    	EditText viewer = (EditText)findViewById(R.id.address);
-    	    	address = viewer.getText().toString();
+//    	    	EditText viewer = (EditText)findViewById(R.id.address);
+//    	    	address = viewer.getText().toString();
     	    	
+    	    	calculateCosts();
     	    	Intent intent = new Intent(getApplicationContext(), SearchActivity.class);
-    	    	intent.putExtra("key", theArray);
+//    	    	intent.putExtra("key", theArray);
+    	    	for(int i = 0; i < 7; i++)
+    	    		intent.putExtra("cost" + i + "", theArray[i]);
+    	    	intent.putExtra("test", deltaH);
+    	    	intent.putExtra("factor", timeFactor);
     	    	startActivity(intent);
     		}
     	}); 
@@ -72,12 +79,18 @@ public class MainActivity extends Activity {
     	if(endH > 18)
     		meterVar -= (endH - 18);
     	
+    	//For Testing
+    	for(int i = 0; i < 7; i++)
+    	{
+    		theArray[i] = 5;
+    	}
+    	
     	//All Meters
     	if(meterVar <= 0)
     	{
-    		theArray[0] = 0;
-    		theArray[1] = 0;
-    		theArray[2] = 0;
+    		theArray[0] = 3;
+    		theArray[1] = 3;
+    		theArray[2] = 3;
     	}
     	
     	//Blue Meters
@@ -123,7 +136,7 @@ public class MainActivity extends Activity {
 			theArray[4] = 0;
 		else if(deltaH == 3)
 			theArray[4] = 2;
-		else if(deltaH <= 4)
+		else if(deltaH == 4)
 			theArray[4] = 4;
 		else if(deltaH <= 8)
 			theArray[4] = deltaH;
@@ -145,11 +158,11 @@ public class MainActivity extends Activity {
     	//Sunday Parking
     	if(day == "Sunday")
     	{
-    		theArray[0] = 0;
-    		theArray[1] = 0;
-    		theArray[2] = 0;
-    		theArray[3] = 0;
-    		theArray[4] = 0;
+    		theArray[0] = 2;
+    		theArray[1] = 2;
+    		theArray[2] = 2;
+    		theArray[3] = 2;
+    		theArray[4] = 2;
     	}
     }
     
