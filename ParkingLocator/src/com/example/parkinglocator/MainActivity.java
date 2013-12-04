@@ -47,15 +47,27 @@ public class MainActivity extends Activity {
     	    	spinner = (Spinner)findViewById(R.id.endH);
     	    	endH = Integer.parseInt(spinner.getSelectedItem().toString());
     	    	
-    	    	spinner = (Spinner)findViewById(R.id.start);
-    	    	timeFactor = spinner.getSelectedItem().toString();
-    	    	if(timeFactor == "p.m.")
-    	    		startH += 12;
-    	    	
-    	    	spinner = (Spinner)findViewById(R.id.end);
-    	    	timeFactor = spinner.getSelectedItem().toString();
-    	    	if(timeFactor == "p.m.")
-    	    		endH += 12;
+//   	    	spinner = (Spinner)findViewById(R.id.start);
+//    	    	timeFactor = spinner.getSelectedItem().toString();
+//    	    	for(int i = 0; i < timeFactor.length(); i++)
+//    	    	{
+//    	    		if(timeFactor.charAt(i) == 'p')
+//    	    		{
+//    	    			startH += 12;
+//    	    			break;
+//    	    		}
+//    	    	}
+//    	    	
+//    	    	spinner = (Spinner)findViewById(R.id.end);
+//    	    	timeFactor = spinner.getSelectedItem().toString();
+//    	    	for(int i = 0; i < timeFactor.length(); i++)
+//    	    	{
+//    	    		if(timeFactor.charAt(i) == 'p')
+//    	    		{
+//    	    			startH += 12;
+//    	    			break;
+//    	    		}
+//    	    	} 
     	    	deltaH = endH - startH;
     	    	
     	    	spinner = (Spinner)findViewById(R.id.parkDay);

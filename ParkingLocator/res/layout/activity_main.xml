@@ -37,7 +37,7 @@
 	        android:entries="@array/hours_array" >
 	        
 	    </Spinner>
-	    
+<!-- 	    
 	    <Spinner
 	        android:id="@+id/start"
 	        android:layout_width="wrap_content"
@@ -45,7 +45,7 @@
 	        android:entries="@array/am_pm" >
 	        
 	    </Spinner>
-    	
+ -->    	
     </LinearLayout>
     
     <LinearLayout
@@ -67,7 +67,7 @@
 	        android:entries="@array/hours_array" >
 	        
 	    </Spinner>
-	    
+<!-- 	    
 	    <Spinner
 	        android:id="@+id/end"
 	        android:layout_width="wrap_content"
@@ -75,7 +75,7 @@
 	        android:entries="@array/am_pm" >
 	        
 	    </Spinner>
-        
+ -->       
     </LinearLayout>
     
     <LinearLayout
