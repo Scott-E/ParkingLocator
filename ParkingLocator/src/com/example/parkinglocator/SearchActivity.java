@@ -17,41 +17,23 @@ public class SearchActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_search);
 		// Show the Up button in the action bar.
-//		double costArray[] = new double[6];
-//		costArray = getIntent().getDoubleArrayExtra("key");
-//		double costArray[] = getIntent().getDoubleArrayExtra("key");
 		double costArray[] = new double[7];
 		for(int i = 0; i < 7; i++)
 			costArray[i] = getIntent().getDoubleExtra("cost" + i, 0);
-		int test = getIntent().getIntExtra("test", 0);
-		String tes = getIntent().getStringExtra("factor");
 		int sortedCosts[] = new int[]{0, 1, 2, 3, 4, 5, 6};
 		
 		sortedCosts = sortResults(costArray, sortedCosts);
-		buildResults(R.id.resultsField, costArray, sortedCosts, tes);
+		buildResults(R.id.resultsField, costArray, sortedCosts);
 		setupActionBar();
 	}
 	
 	public int[] sortResults(double costArray[], int indexArray[])
 	{
-//		int lesserIndex = 0, greaterIndex = 0;
-//		for (int i = 0; i < 6; i++)
-//		{
-//			lesserIndex = i;
-//			for(int j = i + 1; j < 7; j++)
-//			{
-//				greaterIndex = j;
-//				if(costArray[j] < costArray[i])
-//				{
-//					lesserIndex = j;
-//					greaterIndex = i;
-//				}
-//			}
-//			indexArray[i] = lesserIndex;
-//			indexArray[i + 1] = greaterIndex;
-//		}
 		int tmpIndex;
 		double tmpCost;
+		double tmpArray[] = new double[7];
+		for (int i = 0; i < 7; i++)
+			tmpArray[i] = costArray[i];
 		boolean swapped = true;
 		while(swapped)
 		{
@@ -60,11 +42,11 @@ public class SearchActivity extends Activity {
 			{
 				for (int j = 0; j < 6; j++)
 				{
-					if(costArray[j] < costArray[j + 1])
+					if(tmpArray[j] > tmpArray[j + 1])
 					{
-						tmpCost = costArray[j];
-						costArray[j] = costArray[j + 1];
-						costArray[j + 1] = tmpCost;
+						tmpCost = tmpArray[j];
+						tmpArray[j] = tmpArray[j + 1];
+						tmpArray[j + 1] = tmpCost;
 						tmpIndex = indexArray[j];
 						indexArray[j] = indexArray[j + 1];
 						indexArray[j + 1] = tmpIndex;
@@ -76,26 +58,18 @@ public class SearchActivity extends Activity {
 		return indexArray;
 	}
 	
-	public void buildResults(int fieldId, double costs[], int costsIndex[], String tes)
+	public void buildResults(int fieldId, double costs[], int costsIndex[])
 	{
 		LinearLayout field = (LinearLayout)this.findViewById(fieldId);
 		LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.WRAP_CONTENT, 
                 LinearLayout.LayoutParams.WRAP_CONTENT);
 		
-		TextView testing = new TextView(this.getApplicationContext());
-		testing.setText(tes);
-		field.addView(testing);
-		TextView notherTest = new TextView(this.getApplicationContext());
-		notherTest.setText("" + costs[0] + costs[1] + costs[2] + costs[3] + costs[4] + costs[5] + costs[6]);
-		field.addView(notherTest);
-//		testing.setText("" + costsIndex[0] + costsIndex[1] + costsIndex[2] + costsIndex[3] + costsIndex[4] + costsIndex[5] + costsIndex[6]);
-//		field.addView(testing);
-		
 		for(int i = 0; i < 7; i++)
 		{
 			TextView result = new TextView(this.getApplicationContext());
-			switch(costsIndex[i])
+			int tmp = costsIndex[i];
+			switch(tmp)
 			{
 			//Blue Meters
 			case 0:

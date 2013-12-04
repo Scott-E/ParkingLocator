@@ -43,32 +43,34 @@ public class MainActivity extends Activity {
     		{
     			Spinner spinner = (Spinner)findViewById(R.id.startH);
     	    	startH = Integer.parseInt(spinner.getSelectedItem().toString());
+    	    	
     	    	spinner = (Spinner)findViewById(R.id.endH);
     	    	endH = Integer.parseInt(spinner.getSelectedItem().toString());
+    	    	
     	    	spinner = (Spinner)findViewById(R.id.start);
     	    	timeFactor = spinner.getSelectedItem().toString();
-    	    	if(timeFactor != "a.m.")
+    	    	if(timeFactor == "p.m.")
     	    		startH += 12;
+    	    	
     	    	spinner = (Spinner)findViewById(R.id.end);
     	    	timeFactor = spinner.getSelectedItem().toString();
-    	    	if(timeFactor != "a.m.")
+    	    	if(timeFactor == "p.m.")
     	    		endH += 12;
     	    	deltaH = endH - startH;
+    	    	
     	    	spinner = (Spinner)findViewById(R.id.parkDay);
     	    	day = spinner.getSelectedItem().toString();
 //    	    	EditText viewer = (EditText)findViewById(R.id.address);
 //    	    	address = viewer.getText().toString();
     	    	
     	    	calculateCosts();
+    	    	
     	    	Intent intent = new Intent(getApplicationContext(), SearchActivity.class);
-//    	    	intent.putExtra("key", theArray);
     	    	for(int i = 0; i < 7; i++)
     	    		intent.putExtra("cost" + i + "", theArray[i]);
-    	    	intent.putExtra("test", deltaH);
-    	    	intent.putExtra("factor", timeFactor);
     	    	startActivity(intent);
     		}
-    	}); 
+    	});
     }
     
     public void calculateCosts()
@@ -82,12 +84,6 @@ public class MainActivity extends Activity {
     		meterVar -= (8 - endH);
     	if(endH >= 18)
     		meterVar -= (endH - 18);
-    	
-    	//For Testing
-    	for(int i = 0; i < 7; i++)
-    	{
-    		theArray[i] = 5;
-    	}
     	
     	//All Meters
     	if(meterVar <= 0)
@@ -162,124 +158,11 @@ public class MainActivity extends Activity {
     	//Sunday Parking
     	if(day == "Sunday")
     	{
-    		theArray[0] = 2;
-    		theArray[1] = 2;
-    		theArray[2] = 2;
-    		theArray[3] = 2;
-    		theArray[4] = 2;
+    		theArray[0] = 0;
+    		theArray[1] = 0;
+    		theArray[2] = 0;
+    		theArray[3] = 0;
+    		theArray[4] = 0;
     	}
     }
-    
-//    public void populateArray()
-//    {
-//    	int hourCounter = 1;
-//    	//Blue Meters
-//    	if(startH < 8 && timeVarStart == "a.m.")
-//    	for (int i = 0; i < 24; i++)
-//    	{
-//    		if(hourCounter <= 3)
-//    		{
-//    			costArray[0][i] = hourCounter;
-//    			hourCounter++;
-//    		}
-//    		else
-//    			costArray[0][i] = 999;
-//    	}
-//    	hourCounter = 1;
-//    	
-//    	//Gray Meters
-//    	for (int i = 0; i < 24; i++)
-//    	{
-//    		if(hourCounter <= 1)
-//    		{
-//    			costArray[1][i] = hourCounter;
-//    		}
-//    		else
-//    			costArray[1][i] = 999;
-//    		hourCounter++;
-//    	}
-//    	hourCounter =  1;
-//    	
-//    	//Brown Meters
-//    	for (int i = 0; i < 24; i++)
-//    	{
-//    		if(hourCounter <= 10)
-//    		{
-//    			costArray[2][i] = hourCounter * 0.4;
-//    			hourCounter++;
-//    		}
-//    		else
-//    			costArray[2][i] = 999;
-//    	}
-//    	hourCounter = 1;
-//    	
-//    	//Yellow Meters
-////    	for (int i = 0; i < 24; i++)
-////    	{
-////    		
-////    	}
-////    	hourCounter = 1;
-//    	
-//    	//Town Center
-//    	for (int i = 0; i < 24; i++)
-//    	{
-//    		if(hourCounter <= 2)
-//    			costArray[3][i] = 0;
-//    		else if(hourCounter == 3)
-//    			costArray[3][i] = 3;
-//    		else if(hourCounter == 4)
-//    			costArray[3][i] = 5;
-//    		else if(hourCounter == 5)
-//    			costArray[3][i] = 7;
-//    		else if(hourCounter == 6)
-//    			costArray[3][i] = 8;
-//    		else if(hourCounter <= 8)
-//    			costArray[3][i] = 10;
-//    		else if(hourCounter <= 10)
-//    			costArray[3][i] = 12;
-//    		else if(hourCounter <= 12)
-//    			costArray[3][i] = 15;
-//    		else
-//    			costArray[3][i] = 20;
-//    		hourCounter++;
-//    	}
-//    	hourCounter = 1;
-//    	
-//    	//Municipal Garages
-//    	for (int i = 0; i < 24; i++)
-//    	{
-//    		if(hourCounter <= 2)
-//    			costArray[4][i] = 0;
-//    		else if(hourCounter == 3)
-//    			costArray[4][i] = 2;
-//    		else if(hourCounter == 4)
-//    			costArray[4][i] = 4;
-//    		else if(hourCounter <= 8)
-//    			costArray[4][i] = hourCounter;
-//    		else
-//    			costArray[4][i] = 999;
-//    		hourCounter++;
-//    	}
-//    	hourCounter = 1;
-//    	
-//    	//Corporate Place
-//    	for (int i = 0; i < 24; i++)
-//    	{
-//    		if(hourCounter <= 4)
-//    			costArray[5][i] = 2 * hourCounter;
-//    		else
-//    			costArray[5][i] = 999;
-//    		hourCounter++;
-//    	}
-//    	hourCounter = 1;
-//    	
-//    	//Courthouse Place
-//    	for (int i = 0; i < 24; i++)
-//    	{
-//    		if(hourCounter <= 6)
-//    			costArray[6][i] = 1.5 * hourCounter;
-//    		else
-//    			costArray[6][i] = 999;
-//    	}
-//    }
 }
