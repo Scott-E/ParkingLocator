@@ -74,9 +74,13 @@ public class MainActivity extends Activity {
     public void calculateCosts()
     {
     	int meterVar = deltaH;
-    	if(startH < 8)
+    	if(startH <= 8)
     		meterVar -= (8 - startH);
-    	if(endH > 18)
+    	if(startH >= 18)
+    		meterVar -= (startH - 18);
+    	if(endH <= 8)
+    		meterVar -= (8 - endH);
+    	if(endH >= 18)
     		meterVar -= (endH - 18);
     	
     	//For Testing
@@ -88,25 +92,25 @@ public class MainActivity extends Activity {
     	//All Meters
     	if(meterVar <= 0)
     	{
-    		theArray[0] = 3;
-    		theArray[1] = 3;
-    		theArray[2] = 3;
+    		theArray[0] = 0;
+    		theArray[1] = 0;
+    		theArray[2] = 0;
     	}
     	
     	//Blue Meters
-    	if(meterVar <= 3 && meterVar > 0)
+    	if(meterVar <= 3 && meterVar >= 0)
     		theArray[0] = meterVar;
     	else
     		theArray[0] = 999;
     	
     	//Gray Meters
-    	if(meterVar <= 1 && meterVar > 0)
+    	if(meterVar <= 1 && meterVar >= 0)
     		theArray[1] = meterVar;
     	else
     		theArray[1] = 999;
     	
     	//Brown Meters
-    	if(meterVar <= 10 && meterVar > 0)
+    	if(meterVar <= 10 && meterVar >= 0)
     		theArray[2] = meterVar * 0.4;
     	else
     		theArray[2] = 999;

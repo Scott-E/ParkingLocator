@@ -86,6 +86,11 @@ public class SearchActivity extends Activity {
 		TextView testing = new TextView(this.getApplicationContext());
 		testing.setText(tes);
 		field.addView(testing);
+		TextView notherTest = new TextView(this.getApplicationContext());
+		notherTest.setText("" + costs[0] + costs[1] + costs[2] + costs[3] + costs[4] + costs[5] + costs[6]);
+		field.addView(notherTest);
+//		testing.setText("" + costsIndex[0] + costsIndex[1] + costsIndex[2] + costsIndex[3] + costsIndex[4] + costsIndex[5] + costsIndex[6]);
+//		field.addView(testing);
 		
 		for(int i = 0; i < 7; i++)
 		{
