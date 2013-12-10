@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Spinner;
 
@@ -29,11 +30,10 @@ public class MainActivity extends Activity {
         return true;
     }
     
-    String address, street, day, timeFactor;
-    int startH, endH, deltaH;
+    boolean freeDay = false;
     double costArray[] = new double[7];
-    String[] stringArray = new String[]{"A"};
-	ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, stringArray);
+    int startH, endH, deltaH;
+    String address, street, day, timeFactor;
     
     public void onClickListener()
     {
@@ -50,42 +50,20 @@ public class MainActivity extends Activity {
     	    	endH = Integer.parseInt(spinner.getSelectedItem().toString());
     	    	
     	    	spinner = (Spinner)findViewById(R.id.start);
-    	    	spinner.setAdapter(adapter);
-    	    	String timeVar = (String) spinner.getItemAtPosition(0);
-    	    	if(timeVar == "p.m.")
+    	    	if(spinner.getSelectedItem().toString().equals("p.m."))
     	    		startH += 12;
     	    	
     	    	spinner = (Spinner)findViewById(R.id.end);
-    	    	spinner.setAdapter(adapter);
-    	    	timeVar = (String) spinner.getItemAtPosition(0);
-    	    	if(timeVar == "p.m.")
+    	    	if(spinner.getSelectedItem().toString().equals("p.m."))
     	    		endH += 12;
     	    	
-//   	    	spinner = (Spinner)findViewById(R.id.start);
-//    	    	timeFactor = spinner.getSelectedItem().toString();
-//    	    	for(int i = 0; i < timeFactor.length(); i++)
-//    	    	{
-//    	    		if(timeFactor.charAt(i) == 'p')
-//    	    		{
-//    	    			startH += 12;
-//    	    			break;
-//    	    		}
-//    	    	}
-//    	    	
-//    	    	spinner = (Spinner)findViewById(R.id.end);
-//    	    	timeFactor = spinner.getSelectedItem().toString();
-//    	    	for(int i = 0; i < timeFactor.length(); i++)
-//    	    	{
-//    	    		if(timeFactor.charAt(i) == 'p')
-//    	    		{
-//    	    			startH += 12;
-//    	    			break;
-//    	    		}
-//    	    	} 
     	    	deltaH = endH - startH;
     	    	
-    	    	spinner = (Spinner)findViewById(R.id.parkDay);
-    	    	day = spinner.getSelectedItem().toString();
+    	    	CheckBox check = (CheckBox)findViewById(R.id.freeDay);
+    	    	freeDay = check.isChecked();
+    	    	
+//    	    	spinner = (Spinner)findViewById(R.id.parkDay);
+//    	    	day = spinner.getSelectedItem().toString();
 //    	    	EditText viewer = (EditText)findViewById(R.id.address);
 //    	    	address = viewer.getText().toString();
     	    	
@@ -182,13 +160,22 @@ public class MainActivity extends Activity {
 			costArray[6] = 999;
     	
     	//Sunday Parking
-    	if(day == "Sunday")
+    	if(freeDay)
     	{
     		costArray[0] = 0;
     		costArray[1] = 0;
     		costArray[2] = 0;
     		costArray[3] = 0;
     		costArray[4] = 0;
+    	}
+    	
+    	//Negative Number
+    	if(deltaH <= 0)
+    	{
+    		for(int i = 0; i < 7; i++)
+    		{
+    			costArray[i] = 0;
+    		}
     	}
     }
 }

@@ -91,14 +91,21 @@
         </TextView>
         
         <Spinner
-                android:id="@+id/parkDay"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:entries="@array/days_array" >
+            android:id="@+id/parkDay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:entries="@array/days_array" >
                 
-            </Spinner>
+        </Spinner>
+        
+        <Checkbox
+            android:id="@+id/freeDay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
             
-        </LinearLayout>
+        </Checkbox>
+            
+    </LinearLayout>
     
     <LinearLayout
         android:layout_width="fill_parent"
