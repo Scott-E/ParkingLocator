@@ -97,14 +97,7 @@
             android:entries="@array/days_array" >
                 
         </Spinner>
-        
-        <Checkbox
-            android:id="@+id/freeDay"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" >
-            
-        </Checkbox>
-            
+
     </LinearLayout>
     
     <LinearLayout

@@ -30,7 +30,6 @@ public class MainActivity extends Activity {
         return true;
     }
     
-    boolean freeDay = false;
     double costArray[] = new double[7];
     int startH, endH, deltaH;
     String address, street, day, timeFactor;
@@ -59,11 +58,8 @@ public class MainActivity extends Activity {
     	    	
     	    	deltaH = endH - startH;
     	    	
-    	    	CheckBox check = (CheckBox)findViewById(R.id.freeDay);
-    	    	freeDay = check.isChecked();
-    	    	
-//    	    	spinner = (Spinner)findViewById(R.id.parkDay);
-//    	    	day = spinner.getSelectedItem().toString();
+    	    	spinner = (Spinner)findViewById(R.id.parkDay);
+    	    	day = spinner.getSelectedItem().toString();
 //    	    	EditText viewer = (EditText)findViewById(R.id.address);
 //    	    	address = viewer.getText().toString();
     	    	
@@ -160,7 +156,7 @@ public class MainActivity extends Activity {
 			costArray[6] = 999;
     	
     	//Sunday Parking
-    	if(freeDay)
+    	if(day == "Sunday")
     	{
     		costArray[0] = 0;
     		costArray[1] = 0;

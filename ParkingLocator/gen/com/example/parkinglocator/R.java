@@ -9,9 +9,8 @@ package com.example.parkinglocator;
 
 public final class R {
     public static final class array {
-        public static final int am_pm=0x7f060002;
-        public static final int civ_hours_array=0x7f060001;
-        public static final int days_array=0x7f060003;
+        public static final int am_pm=0x7f060001;
+        public static final int days_array=0x7f060002;
         public static final int hours_array=0x7f060000;
     }
     public static final class attr {
@@ -30,16 +29,15 @@ public final class R {
         public static final int ic_launcher=0x7f020000;
     }
     public static final class id {
-        public static final int action_settings=0x7f090009;
+        public static final int action_settings=0x7f090008;
         public static final int address=0x7f090000;
         public static final int end=0x7f090004;
         public static final int endH=0x7f090003;
-        public static final int freeDay=0x7f090006;
         public static final int parkDay=0x7f090005;
-        public static final int resultsField=0x7f090008;
+        public static final int resultsField=0x7f090007;
         public static final int start=0x7f090002;
         public static final int startH=0x7f090001;
-        public static final int submit=0x7f090007;
+        public static final int submit=0x7f090006;
     }
     public static final class layout {
         public static final int activity_main=0x7f030000;
