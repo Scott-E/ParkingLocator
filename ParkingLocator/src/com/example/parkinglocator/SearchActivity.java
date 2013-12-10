@@ -1,5 +1,7 @@
 package com.example.parkinglocator;
 
+import java.text.DecimalFormat;
+
 import android.os.Bundle;
 import android.app.Activity;
 import android.view.Menu;
@@ -65,39 +67,41 @@ public class SearchActivity extends Activity {
                 LinearLayout.LayoutParams.WRAP_CONTENT, 
                 LinearLayout.LayoutParams.WRAP_CONTENT);
 		
+		DecimalFormat dollarsCents = new DecimalFormat("#.00");
 		for(int i = 0; i < 7; i++)
 		{
 			TextView result = new TextView(this.getApplicationContext());
 			int tmp = costsIndex[i];
+			
 			switch(tmp)
 			{
 			//Blue Meters
 			case 0:
-				result.setText("$" + costs[costsIndex[i]] + " - Blue Meters");
+				result.setText("$" + dollarsCents.format(costs[costsIndex[i]]) + " - Blue Meters");
 				break;
 			//Gray Meters
 			case 1:
-				result.setText("$" + costs[costsIndex[i]] + " - Gray Meters");
+				result.setText("$" + dollarsCents.format(costs[costsIndex[i]]) + " - Gray Meters");
 				break;
 			//Brown Meters
 			case 2:
-				result.setText("$" + costs[costsIndex[i]] + " - Brown Meters");
+				result.setText("$" + dollarsCents.format(costs[costsIndex[i]]) + " - Brown Meters");
 				break;
 			//Town Center
 			case 3:
-				result.setText("$" + costs[costsIndex[i]] + " - Town Center located at Cherry Street, Bank Street, and Pine Street");
+				result.setText("$" + dollarsCents.format(costs[costsIndex[i]]) + " - Town Center located at Cherry Street, Bank Street, and Pine Street");
 				break;
 			//Municipal Garages
 			case 4:
-				result.setText("$" + costs[costsIndex[i]] + " - Municipal Garages located at Marketplace, Lakeview, Macy's, College Street, and Hilton");
+				result.setText("$" + dollarsCents.format(costs[costsIndex[i]]) + " - Municipal Garages located at Marketplace, Lakeview, Macy's, College Street, and Hilton");
 				break;
 			//Corporate Place
 			case 5:
-				result.setText("$" + costs[costsIndex[i]] + " - Corporate Place located at Saint Paul Street");
+				result.setText("$" + dollarsCents.format(costs[costsIndex[i]]) + " - Corporate Place located at Saint Paul Street");
 				break;
 			//Courthouse Place
 			case 6:
-				result.setText("$" + costs[costsIndex[i]] + " - Courthouse Place located at South Winooski Avenue");
+				result.setText("$" + dollarsCents.format(costs[costsIndex[i]]) + " - Courthouse Place located at South Winooski Avenue");
 				break;
 			}
 			if(costs[costsIndex[i]] != 999)

@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -30,8 +31,9 @@ public class MainActivity extends Activity {
     
     String address, street, day, timeFactor;
     int startH, endH, deltaH;
-    double costArray[][] = new double[6][24];
-    double theArray[] = new double[7];
+    double costArray[] = new double[7];
+    String[] stringArray = new String[]{"A"};
+	ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, stringArray);
     
     public void onClickListener()
     {
@@ -46,6 +48,18 @@ public class MainActivity extends Activity {
     	    	
     	    	spinner = (Spinner)findViewById(R.id.endH);
     	    	endH = Integer.parseInt(spinner.getSelectedItem().toString());
+    	    	
+    	    	spinner = (Spinner)findViewById(R.id.start);
+    	    	spinner.setAdapter(adapter);
+    	    	String timeVar = (String) spinner.getItemAtPosition(0);
+    	    	if(timeVar == "p.m.")
+    	    		startH += 12;
+    	    	
+    	    	spinner = (Spinner)findViewById(R.id.end);
+    	    	spinner.setAdapter(adapter);
+    	    	timeVar = (String) spinner.getItemAtPosition(0);
+    	    	if(timeVar == "p.m.")
+    	    		endH += 12;
     	    	
 //   	    	spinner = (Spinner)findViewById(R.id.start);
 //    	    	timeFactor = spinner.getSelectedItem().toString();
@@ -79,7 +93,7 @@ public class MainActivity extends Activity {
     	    	
     	    	Intent intent = new Intent(getApplicationContext(), SearchActivity.class);
     	    	for(int i = 0; i < 7; i++)
-    	    		intent.putExtra("cost" + i + "", theArray[i]);
+    	    		intent.putExtra("cost" + i + "", costArray[i]);
     	    	startActivity(intent);
     		}
     	});
@@ -100,81 +114,81 @@ public class MainActivity extends Activity {
     	//All Meters
     	if(meterVar <= 0)
     	{
-    		theArray[0] = 0;
-    		theArray[1] = 0;
-    		theArray[2] = 0;
+    		costArray[0] = 0;
+    		costArray[1] = 0;
+    		costArray[2] = 0;
     	}
     	
     	//Blue Meters
     	if(meterVar <= 3 && meterVar >= 0)
-    		theArray[0] = meterVar;
+    		costArray[0] = meterVar;
     	else
-    		theArray[0] = 999;
+    		costArray[0] = 999;
     	
     	//Gray Meters
     	if(meterVar <= 1 && meterVar >= 0)
-    		theArray[1] = meterVar;
+    		costArray[1] = meterVar;
     	else
-    		theArray[1] = 999;
+    		costArray[1] = 999;
     	
     	//Brown Meters
     	if(meterVar <= 10 && meterVar >= 0)
-    		theArray[2] = meterVar * 0.4;
+    		costArray[2] = meterVar * 0.4;
     	else
-    		theArray[2] = 999;
+    		costArray[2] = 999;
     	
     	//TownCenter
     	if(deltaH <= 2)
-			theArray[3] = 0;
+			costArray[3] = 0;
 		else if(deltaH == 3)
-			theArray[3] = 3;
+			costArray[3] = 3;
 		else if(deltaH == 4)
-			theArray[3] = 5;
+			costArray[3] = 5;
 		else if(deltaH == 5)
-			theArray[3] = 7;
+			costArray[3] = 7;
 		else if(deltaH == 6)
-			theArray[3] = 8;
+			costArray[3] = 8;
 		else if(deltaH <= 8)
-			theArray[3] = 10;
+			costArray[3] = 10;
 		else if(deltaH <= 10)
-			theArray[3] = 12;
+			costArray[3] = 12;
 		else if(deltaH <= 12)
-			theArray[3] = 15;
+			costArray[3] = 15;
 		else
-			theArray[3] = 20;
+			costArray[3] = 20;
     	
     	//Municipal Garages
     	if(deltaH <= 2)
-			theArray[4] = 0;
+			costArray[4] = 0;
 		else if(deltaH == 3)
-			theArray[4] = 2;
+			costArray[4] = 2;
 		else if(deltaH == 4)
-			theArray[4] = 4;
+			costArray[4] = 4;
 		else if(deltaH <= 8)
-			theArray[4] = deltaH;
+			costArray[4] = deltaH;
 		else
-			theArray[4] = 999;
+			costArray[4] = 999;
     	
     	//Corporate Place
     	if(deltaH <= 4)
-			theArray[5] = 2 * deltaH;
+			costArray[5] = 2 * deltaH;
 		else
-			theArray[5] = 999;
+			costArray[5] = 999;
     	
     	//Courthouse Place
     	if(deltaH <= 6)
-			theArray[6] = 1.5 * deltaH;
+			costArray[6] = 1.5 * deltaH;
 		else
-			theArray[6] = 999;
+			costArray[6] = 999;
     	
     	//Sunday Parking
     	if(day == "Sunday")
     	{
-    		theArray[0] = 0;
-    		theArray[1] = 0;
-    		theArray[2] = 0;
-    		theArray[3] = 0;
-    		theArray[4] = 0;
+    		costArray[0] = 0;
+    		costArray[1] = 0;
+    		costArray[2] = 0;
+    		costArray[3] = 0;
+    		costArray[4] = 0;
     	}
     }
 }

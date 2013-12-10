@@ -29,23 +29,23 @@
             android:text="@string/start_time" >
             
         </TextView>
-    	
-	    <Spinner
-	        android:id="@+id/startH"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:entries="@array/hours_array" >
-	        
-	    </Spinner>
-<!-- 	    
-	    <Spinner
-	        android:id="@+id/start"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:entries="@array/am_pm" >
-	        
-	    </Spinner>
- -->    	
+            
+            <Spinner
+                android:id="@+id/startH"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:entries="@array/hours_array" >
+                
+            </Spinner>
+                       
+            <Spinner
+                android:id="@+id/start"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:entries="@array/am_pm" >
+                
+            </Spinner>
+                
     </LinearLayout>
     
     <LinearLayout
@@ -59,30 +59,30 @@
             android:text="@string/end_time" >
             
         </TextView>
-	    
-	    <Spinner
-	        android:id="@+id/endH"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:entries="@array/hours_array" >
-	        
-	    </Spinner>
-<!-- 	    
-	    <Spinner
-	        android:id="@+id/end"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:entries="@array/am_pm" >
-	        
-	    </Spinner>
- -->       
+            
+            <Spinner
+                android:id="@+id/endH"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:entries="@array/hours_array" >
+                
+            </Spinner>
+            
+            <Spinner
+                android:id="@+id/end"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:entries="@array/am_pm" >
+                
+            </Spinner>
+            
     </LinearLayout>
     
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal" >
-	    
+            
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -91,28 +91,28 @@
         </TextView>
         
         <Spinner
-	        android:id="@+id/parkDay"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:entries="@array/days_array" >
-	        
-	    </Spinner>
-	    
-	</LinearLayout>
+                android:id="@+id/parkDay"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:entries="@array/days_array" >
+                
+            </Spinner>
+            
+        </LinearLayout>
     
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal" >
         
-	    <Button
-	        android:id="@+id/submit"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:text="@string/submit" >
-	        
-	    </Button>
-	    
-	</LinearLayout>
+            <Button
+                android:id="@+id/submit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/submit" >
+                
+            </Button>
+            
+        </LinearLayout>
 
 </LinearLayout>
