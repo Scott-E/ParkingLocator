@@ -8,7 +8,7 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".MainActivity"
     android:orientation="vertical" >
-    
+<!--     
     <EditText
         android:id="@+id/address"
         android:layout_width="fill_parent"
@@ -17,7 +17,7 @@
         android:inputType="text" >
         
     </EditText>
-    
+ -->   
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
